@@ -1,9 +1,11 @@
 package platform.zonetry.com.smproject;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+
+import jni.JniManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, String.format("MainActivity.onCreate:Before: str1=%s, str2=%s", str1, str2));
         tv.setText(JniUtil.stringFromJNI());
         Log.i(TAG, String.format("MainActivity.onCreate:After: str1=%s, str2=%s", str1, str2));
-        int a=12;
+        int a=11;
         int b=3;
-        int c = JniUtil.getAddResult(a, b);
+        int c = JniManager.addAB(a,b);
         Log.i(TAG, String.format("MainActivity.onCreate: a=%d, b=%d, c=%d", a, b,c));
     }
+
 
 }

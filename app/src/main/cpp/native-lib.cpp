@@ -3,6 +3,7 @@
 extern "C"{
 #include "test1.h"
 #include <SM2_ENC.h>
+#include "gloable.h"
 }
 
 
@@ -11,6 +12,10 @@ JNIEXPORT jint JNICALL
 Java_platform_zonetry_com_smproject_JniUtil_getAddResult(JNIEnv *env, jclass type, jint a, jint b) {
     int a_=a;
     int b_=b;
+#ifdef Debug
+    LOGI("我在hi_jni.cpp里面和你撩呢!");
+    LOGE("MainActivity 底层test1.c:init()");
+# endif
     return addAB(a_, b_);
 }
 

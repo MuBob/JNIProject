@@ -70,15 +70,15 @@ unsigned char buf[64];
 } SM3_STATE;
 void BiToWj(unsigned long Bi[], unsigned long Wj[]);
 void WjToWj1(unsigned long Wj[], unsigned long Wj1[]);
-void CF(unsigned long Wj[], unsigned long Wj1[], unsigned long V[]);
-void BigEndian(unsigned char src[], unsigned int bytelen, unsigned char des[]);
-void SM3_init(SM3_STATE *md);
-void SM3_compress(SM3_STATE * md);
-void SM3_process(SM3_STATE * md, unsigned char buf[], int len);
-void SM3_done(SM3_STATE *md, unsigned char *hash);
-void SM3_256(unsigned char buf[], int len, unsigned char hash[]);
-void SM3_KDF(unsigned char *Z ,unsigned short zlen,unsigned short klen,unsigned char *K);
-int SM3_SelfTest();
+static void CF(unsigned long Wj[], unsigned long Wj1[], unsigned long V[]);//
+static void BigEndian(unsigned char src[], unsigned int bytelen, unsigned char des[]);//
+static void SM3_init(SM3_STATE *md);//
+static void SM3_compress(SM3_STATE * md);//
+static void SM3_process(SM3_STATE * md, unsigned char buf[], int len);//
+static void SM3_done(SM3_STATE *md, unsigned char *hash);//
+static void SM3_256(unsigned char buf[], int len, unsigned char hash[]);//
+static void SM3_KDF(unsigned char *Z ,unsigned short zlen,unsigned short klen,unsigned char *K);//
+static int SM3_SelfTest();//
 /****************************************************************
 Function:
 Description:
@@ -97,9 +97,9 @@ Return:
 Others:
 ****************************************************************/
 
- 
- 
-void BiToW(unsigned long Bi[], unsigned long W[])
+
+
+static void BiToW(unsigned long Bi[], unsigned long W[])
 {
 int i;
 unsigned long tmp;
@@ -133,7 +133,7 @@ Return:
 null
 Others:
 *****************************************************************/
-void WToW1(unsigned long W[], unsigned long W1[])
+static void WToW1(unsigned long W[], unsigned long W1[])
 {
 int i;
 for(i=0;i<=63;i++)
@@ -162,7 +162,7 @@ Others:
 V[8]
 null
 ********************************************************************/
-void CF(unsigned long W[], unsigned long W1[], unsigned long V[])
+static void CF(unsigned long W[], unsigned long W1[], unsigned long V[])
 {
 unsigned long SS1;
 unsigned long SS2;
@@ -275,7 +275,7 @@ des[bytelen]
 null
 src and des could implies the same address
 *******************************************************************************/
-void BigEndian(unsigned char src[], unsigned int bytelen, unsigned char des[])
+static void BigEndian(unsigned char src[], unsigned int bytelen, unsigned char des[])
 {
 unsigned char tmp = 0;
 unsigned long i = 0;
@@ -308,7 +308,7 @@ Output:
 Return:
 Others:
 *******************************************************************************/
-void SM3_init(SM3_STATE *md)
+static void SM3_init(SM3_STATE *md)
 {
 md->curlen = md->length = 0;
 md->state[0] = SM3_IVA;
@@ -343,7 +343,7 @@ Output:
 Return:
 Others:
 *******************************************************************************/
-void SM3_compress(SM3_STATE * md)
+static void SM3_compress(SM3_STATE * md)
 {
 unsigned long W[68];
 unsigned long W1[64];
@@ -373,7 +373,7 @@ Others:
 SM3_STATE *md
 null
 *******************************************************************************/
-void SM3_process(SM3_STATE * md, unsigned char *buf, int len)
+static void SM3_process(SM3_STATE * md, unsigned char *buf, int len)
 {
 while (len--)
 {
@@ -409,7 +409,7 @@ Output:
 Return:
 Others:
 *******************************************************************************/
-void SM3_done(SM3_STATE *md, unsigned char hash[])
+static void SM3_done(SM3_STATE *md, unsigned char hash[])
 {
 int i;
 unsigned char tmp = 0;
@@ -476,7 +476,7 @@ Others:
 unsigned char hash[32]
 null
 *******************************************************************************/
-void SM3_256(unsigned char buf[], int len, unsigned char hash[])
+static void SM3_256(unsigned char buf[], int len, unsigned char hash[])
 {
 SM3_STATE md;
 
@@ -509,7 +509,7 @@ Return:
 Others:
 //shared secret key
 *******************************************************************************/
-void SM3_KDF( unsigned char Z[] ,unsigned short zlen,unsigned short klen,unsigned char K[])
+static void SM3_KDF( unsigned char Z[] ,unsigned short zlen,unsigned short klen,unsigned char K[])
 {
 unsigned short i,j,t;
 unsigned int bitklen;
@@ -588,7 +588,7 @@ Return:
 //the sm3 operation is wrong
 Others:
 *******************************************************************************/
-int SM3_SelfTest()
+static int SM3_SelfTest()
 {
 unsigned int i=0,a=1,b=1;
 unsigned char Msg1[3]={0x61,0x62,0x63};
