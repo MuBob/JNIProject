@@ -57,7 +57,8 @@ use of MIRACL requires a license which may be obtained from Shamus Software Ltd.
 #define ERR_SELFTEST_KG 0x00000008
 #define ERR_SELFTEST_ENC 0x00000009
 #define ERR_SELFTEST_DEC 0x0000000A
-
+#ifndef SMPROJECT_SM2_ENC_H
+#define SMPROJECT_SM2_ENC_H
 static unsigned char SM2_p[32] =
 {0xFF,0xFF,0xFF,0xFE,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
 0xFF,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
@@ -82,6 +83,7 @@ static unsigned char SM2_h[32]=
 big para_p,para_a,para_b,para_n,para_Gx,para_Gy,para_h;
 epoint *G;
 miracl *mip;
+#endif //SMPROJECT_TEST1_H
 int Test_Point(epoint* point);
 int Test_PubKey(epoint *pubKey);
 int Test_Null(unsigned char array[],int len);

@@ -3,7 +3,6 @@
 //
 
 #include "test1.h"
-
 int addAB(int a, int b){
     init();
     return a+b;

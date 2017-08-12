@@ -10,7 +10,7 @@
                # You can define multiple libraries, and CMake builds them for you.
                # Gradle automatically packages shared libraries with your APK.
 
-               #include_directories(src/main/cpp/)
+               include_directories(src/main/cpp/)
                aux_source_directory(src/main/cpp SOURCE_LIST)
                add_library(
                             native-lib
@@ -22,8 +22,6 @@
                add_library(
                                            JniManager
                                            SHARED
-                                           #src/main/cpp/native-lib.cpp
-                                           #src/main/cpp/test1.c
                                            ${SOURCE_LIST}
                                             )
 
@@ -51,5 +49,4 @@ target_link_libraries( # Specifies the target library.
                        # included in the NDK.
                        ${log-lib} )
 
-target_link_libraries(JniManager
-                                ${log-lib} )
+target_link_libraries(JniManager ${log-lib} )
